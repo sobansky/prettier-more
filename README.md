@@ -1,2 +1,2 @@
-# prettier-more
-Code formatter using prettierx
+# Prettier More
+Code formatter for Visual Studio Code using prettierx.

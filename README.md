@@ -1,7 +1,7 @@
 # Prettier More
 Code formatter for Visual Studio Code using prettierx.
 
-This is a fork of prettier for VS Code. It is using prettierx plugin and gives more formating options.
+_This is a fork of prettier for VS Code. It is using prettierx plugin and gives more formating options._
 
 ### Supported languages:
 _Javascript, TypeScript, HTML, CSS, SCSS, JSON, YAML and more_

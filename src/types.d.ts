@@ -1,4 +1,35 @@
 import * as prettier from 'prettier';
+import { TextDocument } from 'vscode';
+
+type PrettierSupportLanguage = {
+	vscodeLanguageIds?: string[];
+	extensions?: string[];
+	parsers: string[];
+};
+
+type PrettierFileInfoResult = {
+	ignored: boolean;
+	inferredParser?: PrettierBuiltInParserName | null;
+};
+export type PackageManagers = 'npm' | 'yarn' | 'pnpm';
+
+type PrettierBuiltInParserName = string;
+type PrettierResolveConfigOptions = prettier.ResolveConfigOptions;
+type PrettierOptions = prettier.Options;
+type PrettierFileInfoOptions = prettier.FileInfoOptions;
+
+type PrettierModule = {
+	format(source: string, options?: prettier.Options): string;
+	getSupportInfo(): { languages: PrettierSupportLanguage[] };
+	getFileInfo(filePath: string, options?: PrettierFileInfoOptions): Promise<PrettierFileInfoResult>;
+};
+type ModuleResolverInterface = {
+	getPrettierInstance(fileName: string): Promise<PrettierModule | undefined>;
+	getResolvedIgnorePath(fileName: string, ignorePath: string): Promise<string | undefined>;
+	getGlobalPrettierInstance(): PrettierModule;
+	getResolvedConfig(doc: TextDocument, vscodeConfig: PrettierVSCodeConfig): Promise<'error' | 'disabled' | PrettierOptions | null>;
+	dispose(): void;
+};
 
 interface IExtensionConfig {
 	/**

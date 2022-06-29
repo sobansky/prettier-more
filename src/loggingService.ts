@@ -1,6 +1,6 @@
 import { window } from 'vscode';
 
-type LogLevel = 'INFO' | 'WARN' | 'ERROR' | 'NONE';
+type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'NONE';
 
 export class LoggingService {
 	private outputChannel = window.createOutputChannel('prettier-more');
@@ -9,6 +9,18 @@ export class LoggingService {
 
 	public setOutputLevel(logLevel: LogLevel) {
 		this.logLevel = logLevel;
+	}
+
+	public logDebug(message: string, data?: unknown) {
+		if (this.logLevel !== 'DEBUG') {
+			return;
+		}
+
+		this.logMessage(message, 'DEBUG');
+
+		if (data) {
+			this.logObject(data);
+		}
 	}
 
 	public logInfo(message: string, data?: unknown) {

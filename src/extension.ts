@@ -4,6 +4,8 @@ import { ExtensionContext, workspace } from 'vscode';
 import { LoggingService } from './loggingService';
 import { getConfig } from './util';
 import { EXTENSION_DISABLED, RESTART_TO_ENABLE } from './message';
+import { ModuleResolver } from './ModuleResolver';
+import { TemplateService } from './TemplateService';
 
 const extensionName = process.env.EXTENSION_NAME;
 const extensionVersion = process.env.EXTENSION_VERSION;
@@ -29,6 +31,10 @@ export function activate(context: ExtensionContext) {
 	}
 
 	const moduleResolver = new ModuleResolver(loggingService);
+
+	const templateService = new TemplateService(loggingService, moduleResolver.getGlobalPrettierInstance());
+
+	const statusBar = new StatusBar();
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json

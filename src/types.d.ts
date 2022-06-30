@@ -75,3 +75,9 @@ interface IExtensionConfig {
 }
 //TODO: Necessary to add next configuration/options/properties
 export type PrettierVSCodeConfig = IExtensionConfig & prettier.Options;
+
+export interface ExtensionFormattingOptions {
+	rangeStart?: number;
+	rangeEnd?: number;
+	force: boolean;
+}

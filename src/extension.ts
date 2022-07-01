@@ -7,6 +7,7 @@ import { EXTENSION_DISABLED, RESTART_TO_ENABLE } from './message';
 import { ModuleResolver } from './ModuleResolver';
 import { TemplateService } from './TemplateService';
 import { StatusBar } from './StatusBar';
+import PrettierEditService from './PrettierEditService';
 
 const extensionName = process.env.EXTENSION_NAME;
 const extensionVersion = process.env.EXTENSION_VERSION;
@@ -37,7 +38,8 @@ export function activate(context: ExtensionContext) {
 
 	const statusBar = new StatusBar();
 
-	const edutService = new PrettierEditService();
+	const editService = new PrettierEditService(moduleResolver, loggingService, statusBar);
+	editService.registerGlobal();
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand

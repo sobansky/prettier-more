@@ -1,10 +1,18 @@
-import { Disposable, DocumentFilter, TextDocument, TextEditor, Uri, window, workspace } from 'vscode';
+import { Disposable, DocumentFilter, languages, Range, TextDocument, TextEdit, TextEditor, Uri, window, workspace } from 'vscode';
 import { getParserFromLanguageId } from './LanguageFilters';
 import { LoggingService } from './loggingService';
 import { RESTART_TO_ENABLE } from './message';
 import { PrettierEditProvider } from './PrettierEditProvider';
 import { FormatterStatus, StatusBar } from './StatusBar';
-import { ExtensionFormattingOptions, ModuleResolverInterface, PrettierBuiltInParserName, PrettierFileInfoResult, PrettierModule } from './types';
+import {
+	ExtensionFormattingOptions,
+	ModuleResolverInterface,
+	PrettierBuiltInParserName,
+	PrettierFileInfoResult,
+	PrettierModule,
+	PrettierOptions,
+	RangeFormattingOptions
+} from './types';
 import { getConfig } from './util';
 
 interface ISelectors {
@@ -60,13 +68,16 @@ export default class PrettierEditService implements Disposable {
 		prettierConfigWatcher.onDidDelete(this.prettierConfigChanged);
 
 		const textEditorChange = window.onDidChangeActiveTextEditor(this.handleActiveTextEditorChanged);
+
+		this.handleActiveTextEditorChanged(window.activeTextEditor);
+
+		return [ packageWatcher, configurationWatcher, prettierConfigWatcher, textEditorChange ];
 	}
 
 	private resetFormatters = async (uri?: Uri) => {
 		if (uri) {
-			const workspaceFolder = workspace.getWorkspaceFolder(uri);
-			//TODO: Uncomment line bellow when completed this class
-			//this.registeredWorkspaces.delete(workspaceFolder?.uri.fsPath ?? "global");
+			const workspaceFolder = workspace.getWorkspaceFolder(uri);			
+			this.registeredWorkspaces.delete(workspaceFolder?.uri.fsPath ?? "global");
 		}
 		else {
 			// VS Code config change, reset everything
@@ -114,6 +125,16 @@ export default class PrettierEditService implements Disposable {
 
 		if (!isRegistered) {
 			this.registerDocumentFormatEditorProviders(selectors);
+			this.registeredWorkspaces.add(workspaceFolder.uri.fsPath);
+			this.loggingService.logDebug(`Enabling Prettier for Workspace ${workspaceFolder.uri.fsPath}`, selectors);
+		}
+
+		const score = languages.match(selectors.languageSelector, document);
+		if (score > 0) {
+			this.statusBar.update(FormatterStatus.Ready);
+		}
+		else {
+			this.statusBar.update(FormatterStatus.Disabled);
 		}
 	};
 
@@ -177,24 +198,39 @@ export default class PrettierEditService implements Disposable {
 		return { languageSelector, rangeLanguageSelector };
 	};
 
+	public async registerGlobal() {
+		const selectors = await this.getSelectors(this.moduleResolver.getGlobalPrettierInstance());
+		this.registerDocumentFormatEditorProviders(selectors);
+		this.loggingService.logDebug('Enabling Prettier globally', selectors);
+	}
+
 	private registerDocumentFormatEditorProviders({ languageSelector, rangeLanguageSelector }: ISelectors) {
 		this.dispose();
 
 		const editProvider = new PrettierEditProvider(this.provideEdits);
+		this.rangeFormatterHandler = languages.registerDocumentRangeFormattingEditProvider(rangeLanguageSelector, editProvider);
+		this.formatterHandler = languages.registerDocumentFormattingEditProvider(languageSelector, editProvider);
 	}
 
 	public dispose = () => {
-		this.moduleResolver.dispose();
-		//TODO: Uncomment lines bellow after class is complete
-		//this.formatterHandler?.dispose();
-		//this.rangeFormatterHandler?.dispose();
+		this.moduleResolver.dispose();		
+		this.formatterHandler?.dispose();
+		this.rangeFormatterHandler?.dispose();
 		this.formatterHandler = undefined;
 		this.rangeFormatterHandler = undefined;
 	};
 
 	private provideEdits = async (document: TextDocument, options: ExtensionFormattingOptions): Promise<TextEdit[]> => {
 		const startTime = new Date().getTime();
-		const result = await this.format;
+		const result = await this.format(document.getText(), document, options);
+		if (!result) {
+			return [];
+		}
+		const duration = new Date().getTime() - startTime;
+
+		this.loggingService.logInfo(`Formatting completed in ${duration}ms.`);
+		const edit = this.minimalEdit(document, result);
+		return [ edit ];
 	};
 
 	/**
@@ -257,10 +293,115 @@ export default class PrettierEditService implements Disposable {
 		if (fileInfo && fileInfo.inferredParser) {
 			parser = fileInfo.inferredParser;
 		}
-		else if (languageId != 'plaintext') {
+		else if (languageId !== 'plaintext') {
 			this.loggingService.logWarning(`Parser not inferred, trying VS Code language.`);
 			const languages = prettierInstance.getSupportInfo().languages;
 			parser = getParserFromLanguageId(languages, uri, languageId);
 		}
+
+		if (!parser) {
+			this.loggingService.logError(
+				'Failed to resolve a parser, skipping file. If you registered a custom file extension, be sure to configure the parser.'
+			);
+			this.statusBar.update(FormatterStatus.Error);
+			return;
+		}
+
+		const prettierOptions = this.getPrettierOptions(fileName, parser as PrettierBuiltInParserName, vscodeConfig, resolvedConfig, options);
+
+		this.loggingService.logInfo('Prettier-More Options:', prettierOptions);
+
+		try {
+			const formattedText = prettierInstance.format(text, prettierOptions);
+			this.statusBar.update(FormatterStatus.Success);
+
+			return formattedText;
+		} catch (error) {
+			this.loggingService.logError('Error formatting document.', error);
+			this.statusBar.update(FormatterStatus.Error);
+
+			return text;
+		}
+	}
+
+	private getPrettierOptions(
+		fileName: string,
+		parser: PrettierBuiltInParserName,
+		vscodeConfig: PrettierOptions,
+		configOptions: PrettierOptions | null,
+		extensionFormattingOptions: ExtensionFormattingOptions
+	): Partial<PrettierOptions> {
+		const fallbackToVSCodeConfig = configOptions === null;
+
+		const vsOpts: PrettierOptions = {};
+		//TODO: Add next options here
+		if (fallbackToVSCodeConfig) {
+			vsOpts.arrowParens = vscodeConfig.arrowParens;
+			vsOpts.bracketSpacing = vscodeConfig.bracketSpacing;
+			vsOpts.endOfLine = vscodeConfig.endOfLine;
+			vsOpts.htmlWhitespaceSensitivity = vscodeConfig.htmlWhitespaceSensitivity;
+			vsOpts.insertPragma = vscodeConfig.insertPragma;
+			vsOpts.jsxBracketSameLine = vscodeConfig.jsxBracketSameLine;
+			vsOpts.jsxSingleQuote = vscodeConfig.jsxSingleQuote;
+			vsOpts.printWidth = vscodeConfig.printWidth;
+			vsOpts.proseWrap = vscodeConfig.proseWrap;
+			vsOpts.quoteProps = vscodeConfig.quoteProps;
+			vsOpts.requirePragma = vscodeConfig.requirePragma;
+			vsOpts.semi = vscodeConfig.semi;
+			vsOpts.singleQuote = vscodeConfig.singleQuote;
+			vsOpts.tabWidth = vscodeConfig.tabWidth;
+			vsOpts.trailingComma = vscodeConfig.trailingComma;
+			vsOpts.useTabs = vscodeConfig.useTabs;
+			vsOpts.vueIndentScriptAndStyle = vscodeConfig.vueIndentScriptAndStyle;
+		}
+
+		this.loggingService.logInfo(
+			fallbackToVSCodeConfig
+				? 'No local configuration (i.e. .prettierrc or .editorconfig) detected, falling back to VS Code configuration'
+				: 'Detected local configuration (i.e. .prettierrc or .editorconfig), VS Code configuration will not be used'
+		);
+
+		let rangeFormattingOptions: RangeFormattingOptions | undefined;
+		if (extensionFormattingOptions.rangeEnd && extensionFormattingOptions.rangeStart) {
+			rangeFormattingOptions = {
+				rangeEnd: extensionFormattingOptions.rangeEnd,
+				rangeStart: extensionFormattingOptions.rangeStart
+			};
+		}
+
+		const options: PrettierOptions = {
+			...fallbackToVSCodeConfig ? vsOpts : {},
+			...{
+				filepath: fileName,
+				parser: parser as PrettierBuiltInParserName
+			},
+			...rangeFormattingOptions || {},
+			...configOptions || {}
+		};
+
+		if (extensionFormattingOptions.force && options.requirePragma === true) {
+			options.requirePragma = false;
+		}
+
+		return options;
+	}
+
+	private minimalEdit(document: TextDocument, text: string) {
+		const docText = document.getText();
+		let i = 0;
+		while (i < docText.length && i < text.length && docText[i] === text[i]) {
+			++i;
+		}
+
+		let j = 0;
+		while (i + j < docText.length && i + j < text.length && docText[docText.length - j - 1] === text[text.length - j - 1]) {
+			++j;
+		}
+
+		const newText = text.substring(i, text.length - j);
+		const pos0 = document.positionAt(i);
+		const pos1 = document.positionAt(docText.length - j);
+
+		return TextEdit.replace(new Range(pos0, pos1), newText);
 	}
 }

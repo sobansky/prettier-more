@@ -70,6 +70,10 @@ export class LoggingService {
         }		
 	}
 
+	public show() {
+		this.outputChannel.show();
+	}
+	
 	private logMessage(message: string, logLevel: LogLevel) {
 		const localDate = new Date().toLocaleDateString();
 		this.outputChannel.appendLine(`["${logLevel}" - ${localDate}] ${message}`);

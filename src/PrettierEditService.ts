@@ -74,6 +74,29 @@ export default class PrettierEditService implements Disposable {
 		return [ packageWatcher, configurationWatcher, prettierConfigWatcher, textEditorChange ];
 	}
 
+	public forceFormatDocument = async () => {
+		try {
+			const editor = window.activeTextEditor;
+			if (!editor) {
+				this.loggingService.logInfo('No active document. Nothing was formatted.');
+				return;
+			}
+
+			this.loggingService.logInfo('Forced formatting will not use ignore files.');
+
+			const edits = await this.provideEdits(editor.document, { force: true });
+			if (edits.length !== 1) {
+				return;
+			}
+
+			await editor.edit((editBuilder) => {
+				editBuilder.replace(edits[0].range, edits[0].newText);
+			});			
+		} catch (error) {
+			this.loggingService.logError('Error formatting document', error);
+		}
+	};
+
 	private resetFormatters = async (uri?: Uri) => {
 		if (uri) {
 			const workspaceFolder = workspace.getWorkspaceFolder(uri);			

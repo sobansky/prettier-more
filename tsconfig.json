@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+	  "module": "commonjs",
+	  "target": "ES2020",
+	  "outDir": "out",
+	  "strict": true,
+	  "noUnusedLocals": true,
+	  "forceConsistentCasingInFileNames": true,
+	  "removeComments": true,
+	  "lib": ["ES2020"],
+	  "sourceMap": true,
+	  "rootDir": "src"
+	},
+	"exclude": ["node_modules", ".vscode-test", "test-fixtures"],
+	"include": [
+	  "src/**/*.ts",
+	  "./node_modules/vscode/vscode.d.ts",
+	  "./node_modules/vscode/lib/*"
+	]
+  }
+  

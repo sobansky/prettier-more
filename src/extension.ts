@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import { commands, ExtensionContext, workspace } from 'vscode';
-import { LoggingService } from './LoggingService';
+import { LoggingService } from './loggingService';
 import { getConfig } from './util';
 import { EXTENSION_DISABLED, RESTART_TO_ENABLE } from './message';
 import { ModuleResolver } from './ModuleResolver';

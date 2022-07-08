@@ -11,7 +11,7 @@
 	  "sourceMap": true,
 	  "rootDir": "src"
 	},
-	"exclude": ["node_modules", ".vscode-test", "test-fixtures"],
+	"exclude": ["node_modules", ".vscode-test", "test-assets"],
 	"include": [
 	  "src/**/*.ts",
 	  "./node_modules/vscode/vscode.d.ts",

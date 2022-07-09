@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import * as prettier from 'prettier';
+//import * as prettier from 'prettier';
 import * as findUp from 'find-up';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -17,6 +17,10 @@ import {
 } from './message';
 import { ModuleResolverInterface, PackageManagers, PrettierModule, PrettierOptions, PrettierResolveConfigOptions, PrettierVSCodeConfig } from './types';
 import { getConfig, getWorkspaceRelativePath } from './util';
+
+var prettier = require('prettierx');
+
+//const resolve = require['resolve'];
 
 const minPrettierVersion = '0.10.0';
 declare const __webpack_require__: typeof require;

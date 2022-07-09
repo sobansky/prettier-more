@@ -21,6 +21,7 @@
 			"name": "Extension Tests",
 			"type": "extensionHost",
 			"request": "launch",
+			"runtimeExecutable": "${execPath}",
 			"args": [
 				"${workspaceFolder}/test-assets/test.code-workspace",
 				"--disable-extensions",

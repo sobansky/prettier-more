@@ -1,12 +1,13 @@
 import * as assert from 'assert';
 import * as path from 'path';
-import prettierx from 'prettierx';
+//import * as prettierx from 'prettierx';
 //import * as prettier from 'prettier';
 // You can import and use all API from the 'vscode' module
 // as well as import your extension to test it
 import * as vscode from 'vscode';
 
 // import * as myExtension from '../../extension';
+var prettierx = require('prettierx');
 
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -28,6 +29,7 @@ export async function format(workspaceFolderName: string, testFile: string) {
 
 	try {
 		await vscode.window.showTextDocument(doc);
+		await wait(500);
 	} catch (error) {
 		console.log(error);
 		throw error;
@@ -55,7 +57,7 @@ suite('Extension Test Suite', () => {
 	});
 
 	test('TypeScript format test', async () => {
-		await wait(10000);
+		await wait(500);
 		await formatSameAsPrettier('ugly.ts');
 	});
 });

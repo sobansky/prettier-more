@@ -17,7 +17,7 @@ export class StatusBar {
 
 		this.statusBarItem.name = 'Prettier-More';
 		this.statusBarItem.text = 'Prettier-More';
-		this.statusBarItem.command = 'prettier.openOutput';
+		this.statusBarItem.command = 'prettier-more.openOutput';
 		this.update(FormatterStatus.Ready);
 		this.statusBarItem.show();
 	}

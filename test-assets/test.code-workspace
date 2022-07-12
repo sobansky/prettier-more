@@ -1,16 +1,18 @@
 {
-    "folders": [
-        {
-            "path": "project",
-        },
-        {
-            "path": "workspace"
-        }
-    ],
-    "settings": {
-        "editor.defaultFormatter": "marbos.prettier-more",
-        "[typescript]": {
-            "editor.defaultFormatter": "vscode.typescript-language-features"
-        }
+  "folders": [
+    {
+      "path": "project"
+    },
+    {
+      "path": "workspace"
     }
+  ],
+  "settings": {
+    "editor.defaultFormatter": "marbos.prettier-more",
+    "[typescript]": {
+      "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "prettier-more.prettierPath": "",
+    "prettier-more.documentSelectors": ["**/*.abc"]
+  }
 }

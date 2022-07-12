@@ -1,4 +1,5 @@
 import * as assert from 'assert';
+//import * as vscode from 'vscode';
 import { LoggingService } from '../../loggingService';
 import { ModuleResolver } from '../../ModuleResolver';
 
@@ -21,7 +22,7 @@ suite('moduleResolver tests', () => {
 		});
 	});
 
-	test('Format by prettier instance', () => {
+	test('Format by global prettier instance', () => {
 		let prettier = moduleResolver.getGlobalPrettierInstance();
 		let text = 'let x = 3; if (x === 2) {x = 3;} else {x =1;}';
 		let formattedText = prettier.format(text);

@@ -10,8 +10,8 @@ import { StatusBar } from './StatusBar';
 import PrettierEditService from './PrettierEditService';
 import { createConfigFile } from './commands';
 
-const extensionName = process.env.EXTENSION_NAME;
-const extensionVersion = process.env.EXTENSION_VERSION;
+const extensionName = process.env.EXTENSION_NAME || 'dev.prettier-more';
+const extensionVersion = process.env.EXTENSION_VERSION || '0.0.0';
 
 export function activate(context: ExtensionContext) {
 	const loggingService = new LoggingService();

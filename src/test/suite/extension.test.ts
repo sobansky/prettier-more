@@ -67,6 +67,13 @@ suite('Extension Test Suite', () => {
 
 	test('TypeScript format test', async () => {
 		await wait(500);
-		await formatSameAsPrettier('formatTest/uglier.ts');
+
+		// await formatSameAsPrettier('formatTest/ugly.ts');
+
+		// await formatSameAsPrettier('formatTest/ugly.html');
+
+		// await formatSameAsPrettier('formatTest/ugly.css');
+
+		await formatSameAsPrettier('formatTest/ugly.js');
 	});
 });

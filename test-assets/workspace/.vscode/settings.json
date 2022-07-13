@@ -5,6 +5,12 @@
     "[typescript]": {
         "editor.defaultFormatter": "marbos.prettier-more"
     },
+    "[html]": {
+        "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "marbos.prettier-more"
+    },
     "javascript.format.enable": true,
     "files.eol": "\n"
 }

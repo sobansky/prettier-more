@@ -1,8 +1,6 @@
 import * as assert from 'assert';
 import * as path from 'path';
-//import { resolve } from 'path';
-//import * as prettierx from 'prettierx';
-//import * as prettier from 'prettier';
+
 // You can import and use all API from the 'vscode' module
 // as well as import your extension to test it
 
@@ -46,6 +44,8 @@ export async function format(workspaceFolderName: string, testFile: string) {
 
 	console.timeEnd(testFile);
 
+	vscode.commands.executeCommand('workbench.action.closeActiveEditor');
+
 	await wait(5000);
 	return { formattedText: doc.getText(), originText: text };
 }
@@ -71,7 +71,7 @@ suite('Extension Test Suite', () => {
 		// await formatSameAsPrettier('formatTest/ugly.ts');
 
 		// await formatSameAsPrettier('formatTest/ugly.html');
-		await formatSameAsPrettier('formatTest/uglyWithLiterals.html');
+		// await formatSameAsPrettier('formatTest/uglyWithLiterals.html');
 
 		// await formatSameAsPrettier('formatTest/ugly.css');
 
@@ -81,6 +81,6 @@ suite('Extension Test Suite', () => {
 
 		// await formatSameAsPrettier('formatTest/ugly.jsx');
 
-		// await formatSameAsPrettier('formatTest/ugly.json');
+		await formatSameAsPrettier('formatTest/ugly.json');
 	});
 });

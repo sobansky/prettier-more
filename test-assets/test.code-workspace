@@ -13,6 +13,9 @@
       "editor.defaultFormatter": "marbos.prettier-more"
     },
     "prettier-more.prettierPath": "",
-    "prettier-more.documentSelectors": ["**/*.abc"]
+    "prettier-more.documentSelectors": ["**/*.abc"],
+    "[html]": {
+      "editor.defaultFormatter": "marbos.prettier-more"
+    }
   }
 }

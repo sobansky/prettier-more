@@ -65,15 +65,22 @@ suite('Extension Test Suite', () => {
 		assert.strictEqual(-1, [ 1, 2, 3 ].indexOf(0));
 	});
 
-	test('TypeScript format test', async () => {
+	test('File format test', async () => {
 		await wait(500);
 
 		// await formatSameAsPrettier('formatTest/ugly.ts');
 
 		// await formatSameAsPrettier('formatTest/ugly.html');
+		await formatSameAsPrettier('formatTest/uglyWithLiterals.html');
 
 		// await formatSameAsPrettier('formatTest/ugly.css');
 
-		await formatSameAsPrettier('formatTest/ugly.js');
+		// await formatSameAsPrettier('formatTest/ugly.js');
+
+		// await formatSameAsPrettier('formatTest/ugly.tsx');
+
+		// await formatSameAsPrettier('formatTest/ugly.jsx');
+
+		// await formatSameAsPrettier('formatTest/ugly.json');
 	});
 });

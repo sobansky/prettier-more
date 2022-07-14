@@ -11,6 +11,9 @@
     "[css]": {
         "editor.defaultFormatter": "marbos.prettier-more"
     },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "marbos.prettier-more"
+    },
     "javascript.format.enable": true,
     "files.eol": "\n"
 }

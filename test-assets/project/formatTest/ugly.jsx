@@ -1,0 +1,1 @@
+const component = (num) => { if (num > 0) {return "(<div>Great number</div>)";} else {return "(<div>No valid value</div>)";}};

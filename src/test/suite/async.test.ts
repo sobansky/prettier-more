@@ -20,7 +20,7 @@ async function testReturnValue(number: number) {
 	return number + 2;
 }
 
-suite('Async test suite', () => {
+suite('Async Test Suite', () => {
 	test('Wait func test', async () => {
 		await wait(2000);
 

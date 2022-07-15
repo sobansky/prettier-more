@@ -12,10 +12,19 @@
     "[typescript]": {
       "editor.defaultFormatter": "marbos.prettier-more"
     },
-    "prettier-more.prettierPath": "",
-    "prettier-more.documentSelectors": ["**/*.abc"],
     "[html]": {
       "editor.defaultFormatter": "marbos.prettier-more"
-    }
+    },    
+    "[css]": {
+        "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "prettier-more.prettierPath": "",
+    "prettier-more.documentSelectors": ["**/*.abc"],
   }
 }

@@ -3,7 +3,7 @@ import * as assert from 'assert';
 import { LoggingService } from '../../loggingService';
 import { ModuleResolver } from '../../ModuleResolver';
 
-suite('moduleResolver tests', () => {
+suite('ModuleResolver Test Suite', () => {
 	let moduleResolver: ModuleResolver;
 
 	test('Make instance', () => {

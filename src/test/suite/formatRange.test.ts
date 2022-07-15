@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import * as vscode from 'vscode';
 import { wait } from '../utils';
 
-suite('Test format document range', () => {
+suite('Test Format Document Range', () => {
 	test('Formatting typescript doc ranges', async () => {
 		await wait(500);
 

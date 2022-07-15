@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { format } from '../utils';
+import { format } from '../util';
 
 suite('Ignore Test Suite', () => {
 	test('Test ignore file from formatting', async () => {

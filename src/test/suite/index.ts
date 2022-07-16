@@ -2,6 +2,9 @@ import * as path from 'path';
 import * as Mocha from 'mocha';
 import * as glob from 'glob';
 
+//TODO: Test prettier command "prettier:fix": "cross-env prettier --write ./src/**/*.{jsx,js,ts,tsx}",
+//TODO: Test overrides in prettierrc
+//TODO: Test .editorconfig
 export function run(): Promise<void> {
 	// Create the mocha test
 	const mocha = new Mocha({

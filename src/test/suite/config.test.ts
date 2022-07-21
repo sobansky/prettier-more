@@ -23,4 +23,8 @@ suite('Test Configuration', () => {
 	test('Test arrow parens', async () => {
 		await testConfig('arrowParensTest/index.js', 'arrowParensTest/indexExp.js');
 	});
+
+	test('Test print width', async () => {
+		await testConfig('printWidthTest/index.html', 'printWidthTest/indexExp.html');
+	});
 });

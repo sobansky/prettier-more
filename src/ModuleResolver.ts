@@ -18,11 +18,11 @@ import {
 import { ModuleResolverInterface, PackageManagers, PrettierModule, PrettierOptions, PrettierResolveConfigOptions, PrettierVSCodeConfig } from './types';
 import { getConfig, getWorkspaceRelativePath } from './util';
 
-var prettier = require('prettierx');
+var prettier = require('prettier-m');
 
 //const resolve = require['resolve'];
 
-const minPrettierVersion = '0.10.0';
+const minPrettierVersion = '0.0.2';
 declare const __webpack_require__: typeof require;
 declare const __non_webpack_require__: typeof require;
 
@@ -91,7 +91,7 @@ export class ModuleResolver implements ModuleResolverInterface {
 		let modulePath: string | undefined = undefined;
 
 		try {
-			modulePath = prettierPath ? getWorkspaceRelativePath(fileName, prettierPath) : this.findPkg(fileName, 'prettierx');
+			modulePath = prettierPath ? getWorkspaceRelativePath(fileName, prettierPath) : this.findPkg(fileName, 'prettier-m');
 		} catch (error) {
 			let moduleDirectory = '';
 			if (!modulePath && error instanceof Error) {
@@ -117,7 +117,7 @@ export class ModuleResolver implements ModuleResolverInterface {
 
 			const resolvedGlobalPackageManagerPath = globalPathGet(packageManager);
 			if (resolvedGlobalPackageManagerPath) {
-				const globalModulePath = path.join(resolvedGlobalPackageManagerPath, 'prettierx');
+				const globalModulePath = path.join(resolvedGlobalPackageManagerPath, 'prettier-m');
 				if (fs.existsSync(globalModulePath)) {
 					modulePath = globalModulePath;
 				}

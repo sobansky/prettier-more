@@ -6,12 +6,12 @@ import * as assert from 'assert';
 
 import { wait, format } from '../util';
 
-var prettierx = require('prettierx');
+var prettierm = require('prettier-m'); //require('prettier-m');
 
 async function formatSameAsPrettier(file: string) {
 	const { formattedText, originText } = await format('project', file);
 
-	const prettierFormattedText = prettierx.format(originText);
+	const prettierFormattedText = prettierm.format(originText);
 
 	assert.equal(formattedText, prettierFormattedText);
 }
@@ -19,7 +19,7 @@ suite('Format Test Suite', () => {
 	test('File format test', async () => {
 		await wait(2000);
 
-		// await formatSameAsPrettier('formatTest/ugly.ts');
+		await formatSameAsPrettier('formatTest/ugly.ts');
 
 		// await formatSameAsPrettier('formatTest/ugly.html');
 		// await formatSameAsPrettier('formatTest/uglyWithLiterals.html');
@@ -32,6 +32,6 @@ suite('Format Test Suite', () => {
 
 		// await formatSameAsPrettier('formatTest/ugly.jsx');
 
-		await formatSameAsPrettier('formatTest/ugly.json');
+		// await formatSameAsPrettier('formatTest/ugly.json');
 	});
 });

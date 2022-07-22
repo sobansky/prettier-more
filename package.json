@@ -20,22 +20,9 @@
 	"engines": {
 		"vscode": "^1.68.0"
 	},
-	"keywords": [
-		"prettier",
-		"formatter",
-		"javascript",
-		"typescript",
-		"html",
-		"css",
-		"json",
-		"yaml"
-	],
-	"categories": [
-		"Formatters"
-	],
-	"activationEvents": [
-		"onStartupFinished"
-	],
+	"keywords": [ "prettier", "formatter", "javascript", "typescript", "html", "css", "json", "yaml" ],
+	"categories": [ "Formatters" ],
+	"activationEvents": [ "onStartupFinished" ],
 	"main": "./dist/extension",
 	"icon": "icon.png",
 	"contributes": {
@@ -98,11 +85,7 @@
 				"prettier-more.packageManager": {
 					"scope": "resource",
 					"type": "string",
-					"enum": [
-						"npm",
-						"yarn",
-						"pnpm"
-					],
+					"enum": [ "npm", "yarn", "pnpm" ],
 					"defult": "yarn",
 					"deprecationMessage": "%ext.config.packageManagerDeprecation%",
 					"markdownDescription": "%ext.config.packageManager%"
@@ -155,11 +138,7 @@
 				},
 				"prettier-more.trailingComma": {
 					"type": "string",
-					"enum": [
-						"none",
-						"es5",
-						"all"
-					],
+					"enum": [ "none", "es5", "all" ],
 					"default": "es5",
 					"markdownDescription": "%ext.config.trailingComma%",
 					"scope": "resource"
@@ -202,21 +181,14 @@
 				},
 				"prettier-more.proseWrap": {
 					"type": "string",
-					"enum": [
-						"preserve",
-						"always",
-						"never"
-					],
+					"enum": [ "preserve", "always", "never" ],
 					"default": "preserve",
 					"markdownDescription": "%ext.config.proseWrap%",
 					"scope": "resource"
 				},
 				"prettier-more.arrowParens": {
 					"type": "string",
-					"enum": [
-						"avoid",
-						"always"
-					],
+					"enum": [ "avoid", "always" ],
 					"default": "always",
 					"markdownDescription": "%ext.config.arrowParens%",
 					"scope": "resource"
@@ -229,11 +201,7 @@
 				},
 				"prettier-more.htmlWhitespaceSensitivity": {
 					"type": "string",
-					"enum": [
-						"css",
-						"strict",
-						"ignore"
-					],
+					"enum": [ "css", "strict", "ignore" ],
 					"default": "css",
 					"markdownDescription": "%ext.config.htmlWhitespaceSensitivity%",
 					"scope": "resource"
@@ -246,33 +214,21 @@
 				},
 				"prettier-more.endOfLine": {
 					"type": "string",
-					"enum": [
-						"auto",
-						"lf",
-						"crlf",
-						"cr"
-					],
+					"enum": [ "auto", "lf", "crlf", "cr" ],
 					"default": "lf",
 					"markdownDescription": "%ext.config.endOfLine%",
 					"scope": "resource"
 				},
 				"prettier-more.quoteProps": {
 					"type": "string",
-					"enum": [
-						"as-needed",
-						"consistent",
-						"preserve"
-					],
+					"enum": [ "as-needed", "consistent", "preserve" ],
 					"default": "as-needed",
 					"markdownDescription": "%ext.config.quoteProps%",
 					"scope": "resource"
 				},
 				"prettier-more.embeddedLanguageFormatting": {
 					"type": "string",
-					"enum": [
-						"auto",
-						"off"
-					],
+					"enum": [ "auto", "off" ],
 					"default": "auto",
 					"markdownDescription": "%ext.config.embeddedLanguageFormatting%",
 					"scope": "resource"
@@ -296,34 +252,23 @@
 		"languages": [
 			{
 				"id": "json",
-				"filenames": [
-					".prettierrc"
-				]
+				"filenames": [ ".prettierrc" ]
 			},
 			{
 				"id": "ignore",
-				"filenames": [
-					".prettierignore"
-				]
+				"filenames": [ ".prettierignore" ]
 			},
 			{
 				"id": "graphql",
-				"extensions": [
-					".graphql"
-				]
+				"extensions": [ ".graphql" ]
 			},
 			{
 				"id": "vue",
-				"extensions": [
-					".vue"
-				]
+				"extensions": [ ".vue" ]
 			},
 			{
 				"id": "handlebars",
-				"extensions": [
-					".hbs",
-					".handlebars"
-				]
+				"extensions": [ ".hbs", ".handlebars" ]
 			}
 		]
 	},
@@ -360,7 +305,8 @@
 	"dependencies": {
 		"fs-extra": "^10.1.0",
 		"global": "^4.4.0",
-		"prettierx": "0.19.0",
+		"prettier-m": "0.0.2",
+		"prettier": "2.7.1",
 		"resolve": "^1.22.1",
 		"vscode-nls": "^5.0.1"
 	},

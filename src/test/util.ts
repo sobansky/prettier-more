@@ -28,7 +28,7 @@ export async function format(workspaceFolderName: string, testFile: string) {
 
 	try {
 		vscode.window.showTextDocument(doc);
-		await wait(500);
+		await wait(1500);
 	} catch (error) {
 		console.log(error);
 		throw error;

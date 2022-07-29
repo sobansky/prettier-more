@@ -19,13 +19,13 @@
       "editor.defaultFormatter": "marbos.prettier-more"
     },    
     "[css]": {
-        "editor.defaultFormatter": "marbos.prettier-more"
+      "editor.defaultFormatter": "marbos.prettier-more"
     },
     "[javascript]": {
       "editor.defaultFormatter": "marbos.prettier-more"
     },
     "[javascriptreact]": {
-        "editor.defaultFormatter": "marbos.prettier-more"
+      "editor.defaultFormatter": "marbos.prettier-more"
     },
     "[json]": {
       "editor.defaultFormatter": "marbos.prettier-more"

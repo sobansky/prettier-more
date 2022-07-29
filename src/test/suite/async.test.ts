@@ -1,5 +1,4 @@
 import * as assert from 'assert';
-//import { before } from 'mocha';
 import * as vscode from 'vscode';
 
 async function wait(ms: number): Promise<void> {

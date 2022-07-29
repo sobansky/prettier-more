@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { promisify } from 'util';
 import { readFile } from 'fs';
-//import { Done } from 'mocha';
 
 export async function wait(ms: number): Promise<void> {
 	return new Promise((resolve, reject) => setTimeout(resolve, ms));

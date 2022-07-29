@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-//import * as prettier from 'prettier';
+// import * as prettier from 'prettier';
 import * as findUp from 'find-up';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -19,10 +19,11 @@ import { ModuleResolverInterface, PackageManagers, PrettierModule, PrettierOptio
 import { getConfig, getWorkspaceRelativePath } from './util';
 
 var prettier = require('prettier-m');
+const prettierName = 'prettier-m';
 
 //const resolve = require['resolve'];
 
-const minPrettierVersion = '0.0.2';
+const minPrettierVersion = '0.1.1';
 declare const __webpack_require__: typeof require;
 declare const __non_webpack_require__: typeof require;
 
@@ -91,7 +92,7 @@ export class ModuleResolver implements ModuleResolverInterface {
 		let modulePath: string | undefined = undefined;
 
 		try {
-			modulePath = prettierPath ? getWorkspaceRelativePath(fileName, prettierPath) : this.findPkg(fileName, 'prettier-m');
+			modulePath = prettierPath ? getWorkspaceRelativePath(fileName, prettierPath) : this.findPkg(fileName, prettierName);
 		} catch (error) {
 			let moduleDirectory = '';
 			if (!modulePath && error instanceof Error) {
@@ -117,7 +118,7 @@ export class ModuleResolver implements ModuleResolverInterface {
 
 			const resolvedGlobalPackageManagerPath = globalPathGet(packageManager);
 			if (resolvedGlobalPackageManagerPath) {
-				const globalModulePath = path.join(resolvedGlobalPackageManagerPath, 'prettier-m');
+				const globalModulePath = path.join(resolvedGlobalPackageManagerPath, prettierName);
 				if (fs.existsSync(globalModulePath)) {
 					modulePath = globalModulePath;
 				}

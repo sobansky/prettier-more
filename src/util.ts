@@ -3,7 +3,6 @@ import path = require('path');
 import { Uri, workspace } from 'vscode';
 import { PrettierVSCodeConfig } from './types';
 
-//TODO: Necessary to add advanced configuration
 export function getConfig(uri?: Uri): PrettierVSCodeConfig {
 	const config = (workspace.getConfiguration('prettier-more', uri) as unknown) as PrettierVSCodeConfig;
 

@@ -1,0 +1,4 @@
+{
+  "breakLongMethodChains":true,
+  "indentChains": true
+}

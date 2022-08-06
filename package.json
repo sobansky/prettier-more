@@ -232,6 +232,36 @@
 					"default": "auto",
 					"markdownDescription": "%ext.config.embeddedLanguageFormatting%",
 					"scope": "resource"
+				},
+				"prettier-more.singleAttributePerLine": {
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "%ext.config.singleAttributePerLine%",
+					"scope": "resource"
+				},
+				"prettier-more.arrayBracketSpacing": {
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "%ext.config.arrayBracketSpacing%",
+					"scope": "resource"
+				},
+				"prettier-more.breakBeforeElse": {
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "%ext.config.breakBeforeElse%",
+					"scope": "resource"
+				},
+				"prettier-more.breakLongMethodChains": {
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "%ext.config.breakLongMethodChains%",
+					"scope": "resource"
+				},
+				"prettier-more.indentChains": {
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "%ext.config.indentChains%",
+					"scope": "resource"
 				}
 			}
 		},

@@ -357,7 +357,7 @@ export default class PrettierEditService implements Disposable {
 		const fallbackToVSCodeConfig = configOptions === null;
 
 		const vsOpts: PrettierOptions = {};
-		//TODO: Add next options here
+		
 		if (fallbackToVSCodeConfig) {
 			vsOpts.arrowParens = vscodeConfig.arrowParens;
 			vsOpts.bracketSpacing = vscodeConfig.bracketSpacing;
@@ -376,6 +376,10 @@ export default class PrettierEditService implements Disposable {
 			vsOpts.trailingComma = vscodeConfig.trailingComma;
 			vsOpts.useTabs = vscodeConfig.useTabs;
 			vsOpts.vueIndentScriptAndStyle = vscodeConfig.vueIndentScriptAndStyle;
+			vsOpts.arrayBracketSpacing = vscodeConfig.arrayBracketSpacing;
+			vsOpts.breakBeforeElse = vscodeConfig.breakBeforeElse;
+			vsOpts.breakLongMethodChains = vscodeConfig.breakLongMethodChains;
+			vsOpts.indentChains = vscodeConfig.indentChains;
 		}
 
 		this.loggingService.logInfo(

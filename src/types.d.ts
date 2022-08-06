@@ -15,11 +15,11 @@ export type PackageManagers = 'npm' | 'yarn' | 'pnpm';
 
 type PrettierBuiltInParserName = string;
 type PrettierResolveConfigOptions = prettier.ResolveConfigOptions;
-type PrettierOptions = prettier.Options;
+type PrettierOptions = prettier.Options & PrettierMoreOptions;
 type PrettierFileInfoOptions = prettier.FileInfoOptions;
 
 type PrettierModule = {
-	format(source: string, options?: prettier.Options): string;
+	format(source: string, options?: PrettierOptions): string;
 	getSupportInfo(): { languages: PrettierSupportLanguage[] };
 	getFileInfo(filePath: string, options?: PrettierFileInfoOptions): Promise<PrettierFileInfoResult>;
 };
@@ -73,8 +73,33 @@ interface IExtensionConfig {
      */
 	enableDebugLogs: boolean;
 }
-//TODO: Necessary to add next configuration/options/properties
-export type PrettierVSCodeConfig = IExtensionConfig & prettier.Options;
+
+export interface PrettierMoreOptions extends Partial<AdvancedOptions> { }
+
+interface AdvancedOptions {
+	/**
+	 * Put spaces between array brackets
+	 * @default false
+	 */
+ 	arrayBracketSpacing: boolean;
+	/**
+	 * Always add a line break before else.
+	 * @default false
+	 */
+	breakBeforeElse: boolean;
+	/**
+	 * Break method chains with more than 3 method calls
+	 * @default false
+	 */
+	breakLongMethodChains: boolean;
+	/**
+	 * Put indents at the start of chained calls.
+	 * @default false
+	 */
+	indentChains: boolean;
+}
+
+export type PrettierVSCodeConfig = IExtensionConfig & prettier.Options & PrettierMoreOptions;
 
 export interface RangeFormattingOptions {
 	rangeStart: number;

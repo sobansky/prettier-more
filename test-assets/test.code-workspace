@@ -7,6 +7,9 @@
       "path": "project"
     },
     {
+      "path": "singleFile"
+    },
+    {
       "path": "workspace"
     }
   ],
@@ -17,7 +20,7 @@
     },
     "[html]": {
       "editor.defaultFormatter": "marbos.prettier-more"
-    },    
+    },
     "[css]": {
       "editor.defaultFormatter": "marbos.prettier-more"
     },
@@ -31,8 +34,6 @@
       "editor.defaultFormatter": "marbos.prettier-more"
     },
     "prettier-more.prettierPath": "",
-    "prettier-more.documentSelectors": [
-      "**/*.abc"
-    ],
+    "prettier-more.documentSelectors": ["**/*.abc"]
   }
 }

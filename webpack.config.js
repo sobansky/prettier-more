@@ -25,25 +25,10 @@ const config = {
   devtool: 'source-map',
   externals: {
     vscode: 'commonjs vscode',
-    'prettier-m': 'commonjs prettier-m',
+    //'prettier-m': 'commonjs prettier-m',
   },
   resolve: {
-    mainFields: ['browser', 'module', 'main'],
     extensions: ['.ts', '.js'],
-    modules: ['node_modules'],
-    alias: {
-      // provides alternate implementation for node module and source files
-    },
-    fallback: {
-      util: require.resolve('util/'),
-      path: require.resolve('path-browserify'),
-      child_process: false,
-      fs: false,
-      os: false,
-      // Webpack 5 no longer polyfills Node.js core modules automatically.
-      // see https://webpack.js.org/configuration/resolve/#resolvefallback
-      // for the list of Node.js core module polyfills.
-    },
   },
   module: {
     rules: [

@@ -1,0 +1,6 @@
+<button 
+	class="type" 
+	id="test" 
+    title="test button">
+    Hello Test
+</button>

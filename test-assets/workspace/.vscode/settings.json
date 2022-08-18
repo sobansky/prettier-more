@@ -1,0 +1,8 @@
+{    
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "javascript.format.enable": true,
+    "typescript.format.enable": true,
+    "files.eol": "\n"
+}

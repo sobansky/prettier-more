@@ -1,0 +1,39 @@
+{
+  "folders": [
+    {
+      "path": "config"
+    },
+    {
+      "path": "project"
+    },
+    {
+      "path": "singleFile"
+    },
+    {
+      "path": "workspace"
+    }
+  ],
+  "settings": {
+    "editor.defaultFormatter": "marbos.prettier-more",
+    "[typescript]": {
+      "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "[html]": {
+      "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "[css]": {
+      "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "marbos.prettier-more"
+    },
+    "prettier-more.prettierPath": "",
+    "prettier-more.documentSelectors": ["**/*.abc"]
+  }
+}

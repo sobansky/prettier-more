@@ -1,8 +1,8 @@
 {
   "name": "prettier-more",
   "displayName": "Prettier More - Code formatter",
-  "description": "Code formatter for Visual Studio Code using prettierx.",
-  "version": "1.0.0",
+  "description": "Code formatter for Visual Studio Code using prettier-m.",
+  "version": "1.0.1",
   "publisher": "marbos",
   "author": "MarBos",
   "galleryBanner": {

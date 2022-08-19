@@ -5,7 +5,9 @@ All notable changes to the "prettier-more" extension will be documented in this 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-## [1.0.0] - 2022-08-15
+## [1.0.1] - 2022-08-19
+- Changed some descriptions details/mistakes
+## [1.0.0] - 2022-08-18
 - Initial release
 - Contains additional configuration options:
 <div style="margin-left:20px">

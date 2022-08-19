@@ -7,7 +7,7 @@ _This is a fork of prettier for VS Code. It is using prettier-m plugin and it gi
 _Javascript, TypeScript, HTML, CSS, SCSS, JSON, YAML and more_
 
 ## Installation
-#
+
 It is possible to install it via VS Code extensions. Search for `Prettier More - Code formatter`. 
 
 Then you can open the JSON settings and add following lines:
@@ -18,7 +18,7 @@ Then you can open the JSON settings and add following lines:
 }
  ```
 ## Formatting options
-#
+
 ### New formatting options
 <!-- * **alignObjectProperties** (_default **true**_) : align colons in multiline object literals, except JSON
 
